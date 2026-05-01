@@ -2,7 +2,8 @@ import json
 import discord
 from discord.ext import commands
 import aiohttp
-from chaves import chave_clima
+
+# em construção / isso aqui nao e um projeto sério, serve mais como um aprendizado pessoal
 
 async def clima(ctx: commands, city, outro):
   async with aiohttp.ClientSession() as session:
