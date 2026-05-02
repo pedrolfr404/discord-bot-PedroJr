@@ -15,11 +15,11 @@ class MyBot(commands.Bot):
   async def setup_hook(self):
     for filename in os.listdir('./cogs'): # itera sobre os arquivos dentro do diretorio cogs
       if filename.endswith('.py'): # verifica se é um arquivo .py
-          try:
-              # Carrega a extensão (ex: cogs.acoes)
-              await self.load_extension(f'cogs.{filename[:-3]}')
-          except Exception as e:
-              print(f'Erro ao carregar {filename}: {e}')
+        try:
+          # Carrega a extensão (ex: cogs.acoes)
+          await self.load_extension(f'cogs.{filename[:-3]}')
+        except Exception as e:
+          print(f'Erro ao carregar {filename}: {e}')
   
     print("Bot inicializado")
 
