@@ -14,9 +14,10 @@ class clima(commands.Cog):
 
   @commands.command(aliases=['weather', 'clima','tempo'])
   async def weather_get(self, ctx: commands, *, city):
+    filtro = city.replace(" ", ",")
     # obter latitude e longitude pelo nome da cidade
     async with aiohttp.ClientSession() as session: 
-      async with session.get(f'http://api.openweathermap.org/geo/1.0/direct?q={city}code&limit=1&appid={weather_key}') as response:
+      async with session.get(f'http://api.openweathermap.org/geo/1.0/direct?q={filtro}code&limit=1&appid={weather_key}') as response:
         if response.status != 200:
           return ctx.reply('ERRO')
         
