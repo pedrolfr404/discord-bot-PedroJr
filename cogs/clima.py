@@ -13,7 +13,7 @@ class clima(commands.Cog):
     self.bot = bot
 
   @commands.command(aliases=['weather', 'clima','tempo'])
-  async def weather_get(self, ctx: commands, *, city):
+  async def weather_get(self, ctx: commands.Context, *, city):
     filtro = city.replace(" ", ",")
     # obter latitude e longitude pelo nome da cidade
     async with aiohttp.ClientSession() as session: 
@@ -61,7 +61,7 @@ class clima(commands.Cog):
           embed.add_field( #vento km/h
             inline=True,
             name=':wind_blowing_face: Vel. do Vento',
-            value=f"{vento:.2f} km/h"
+            value=f"{vento:.2f} m/s"
           )
           embed.add_field( #pressao ar
             inline=True,
@@ -70,6 +70,11 @@ class clima(commands.Cog):
           )
 
           await ctx.reply(embed=embed)
+
+  @weather_get.error
+  async def weather_error(self, ctx, error):
+    if isinstance(error, commands.BadArgument):
+      await ctx.reply('Não encontrei está cidade!')
 
 async def setup(bot):
     await bot.add_cog(clima(bot))
